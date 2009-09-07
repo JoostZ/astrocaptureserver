@@ -11,7 +11,11 @@ using ScopeServer;
 
 namespace AscomGuiding
 {
-    public class AscomDriver : ITelescopeDriver
+    /**
+     * @brief
+     * ASCOM driver used in ScopeServer
+     */
+    public class AscomDriver : ITelescopeDriver, IDisposable
     {
         public delegate void StartStopHandler(bool forward);
         public event StartStopHandler OnStartRa = null;
@@ -19,35 +23,97 @@ namespace AscomGuiding
         public event StartStopHandler OnStartDe = null;
         public event StartStopHandler OnStopDe = null;
 
-        private Telescope _telescope;
+        private Telescope iTelescope;
+
+        /**
+         * @brief
+         * Initiate a Telescope object specified by ID
+         * 
+         * @param ProgId
+         * ID of the ASCOM driver
+         */
         public AscomDriver(String ProgId)
         {
-            _telescope = new Telescope(ProgId);
-            _telescope.Connected = true;
-            _telescope.Unpark();
-        }
-        public void Setup()
-        {
-            _telescope.SetupDialog();
+            iTelescope = new Telescope(ProgId);
+            iTelescope.Connected = true;
+            iTelescope.Unpark();
         }
 
-        public void Disconnect()
+        /**
+         * @brief
+         * Destructor
+         */
+        ~AscomDriver()
         {
-            _telescope.Connected = false;
-            _telescope.Dispose();
-            _telescope = null;
+            Dispose(false);
         }
+
+        #region Disposing
+        
+        private bool iDisposed = false;
+
+        /**
+         * @brief
+         * Release resources of the driver
+         */
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!this.iDisposed)
+            {
+                iTelescope.Park();
+                iTelescope.Connected = false;
+
+                // If disposing equals true, dispose all managed
+                // and unmanaged resources.
+                if (disposing)
+                {
+                    iTelescope.Dispose();
+                }
+
+                // Note disposing has been done.
+                iDisposed = true;
+            }
+        }
+        #endregion
+
+        #region TelescopeProperties
+
+        /**
+         * @brief
+         * Setup of the associated Telescope
+         */
+        public void Setup()
+        {
+            iTelescope.SetupDialog();
+        }
+
+        /**
+         * @brief
+         * Name of the Telescope
+         */
+        public String Name
+        {
+            get
+            {
+                return iTelescope.Name;
+            }
+        }
+
 
         public double GuideRateAscension
         {
             get
             {
 
-                if (_telescope.CanPulseGuide)
+                if (iTelescope.CanPulseGuide)
                 {
-                    // GuideRatRightAscension is in arcseconds per second
-                    // We need to convert it to miliseconds per arcsecond
-                    return _telescope.GuideRateRightAscension;
+                    return iTelescope.GuideRateRightAscension;
                 }
                 else
                 {
@@ -55,26 +121,43 @@ namespace AscomGuiding
                 }
             }
         }
+
+        /**
+         * @brief
+         * The guiding rate (in degrees per second) in Dec
+         */
         public double GuideRateDeclination
         {
             get
             {
 
-                if (_telescope.CanPulseGuide)
+                if (iTelescope.CanPulseGuide)
                 {
-                    // GuideRatRightAscension is in arcseconds per second
-                    // We need to convert it to miliseconds per arcsecond
-                    return _telescope.GuideRateDeclination;
+                    return iTelescope.GuideRateDeclination;
                 }
                 else
                 {
                     return 0.0;
                 }
             }
-        }
+        } 
+        #endregion
 
         #region ITelescopeDriver Members
 
+        /**
+         * @brief
+         * Pulse the telescope
+         * 
+         * @param raDuration
+         * Time (in miliseconds) to move in RA direction. Sign specifies the direction.
+         * 
+         * @param
+         * Time (in miliseconds) to move in Dec direction. Sign specifies the direction.
+         * 
+         * @remark
+         * Currently only pulsguiding is supported, not separate MoveAxis
+         */
         public void Pulse(int raDuration, int decDuration)
         {
             GuideDirections direction;
@@ -89,7 +172,7 @@ namespace AscomGuiding
                 {
                     direction = GuideDirections.guideEast;
                 }
-                _telescope.PulseGuide(direction, raDuration);
+                iTelescope.PulseGuide(direction, raDuration);
             }
             if (decDuration != 0)
             {
@@ -102,23 +185,13 @@ namespace AscomGuiding
                 {
                     direction = GuideDirections.guideNorth;
                 }
-                _telescope.PulseGuide(direction, decDuration);
+                iTelescope.PulseGuide(direction, decDuration);
             }
         }
 
         #endregion
 
-        public String Select()
-        {
-            string ProgId = Telescope.Choose("");
-            _telescope = new Telescope(ProgId);
-            _telescope.Connected = true;
-            _telescope.Unpark();
-
-            return
-            _telescope.Name;
-        }
-
+        #region Future functions
         private void GuideParallel(int ra_milli, int dec_milli)
         {
 
@@ -215,6 +288,7 @@ namespace AscomGuiding
                 }
             }
 
-        }
+        } 
+        #endregion
     }
 }

@@ -203,9 +203,17 @@ namespace ScopeServer
             if (handler.Connected)
             {
 
-                // Read data from the client socket. 
-                state.bytesRead = handler.EndReceive(ar);
-                state.index = 0;
+                try
+                {
+                    // Read data from the client socket. 
+                    state.bytesRead = handler.EndReceive(ar);
+                    state.index = 0;
+                }
+                catch (SocketException)
+                {
+                    // Probably closed at other side
+                    state.bytesRead = 0;
+                }
             }
             else
             {

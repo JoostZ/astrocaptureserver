@@ -15,13 +15,14 @@ namespace AscomGuiding
 {
     public partial class MainForm : Form
     {
-        private AscomDriver _driver = null;
+        private AscomDriver iDriver = null;
         private ScopeServer.GuidingServer iServer = null;
         private int _port = 4242;
  
         public MainForm()
         {
             InitializeComponent();
+            txtPort.Text  = _port.ToString();
             SetupServer();
         }
 
@@ -29,10 +30,15 @@ namespace AscomGuiding
         {
 
             string ProgId = Telescope.Choose("");
-            txtSelectedDriver.Text = ProgId;
-            _driver = new AscomDriver(ProgId);
-            iServer.Driver = _driver;
+            if (iDriver != null)
+            {
+                iDriver.Dispose();
+            }
+            iDriver = new AscomDriver(ProgId);
+            iServer.Driver = iDriver;
             btnSetup.Enabled = true;
+
+            txtSelectedDriver.Text = iDriver.Name;
 
             ShowPulseGuiding();
             
@@ -40,6 +46,25 @@ namespace AscomGuiding
 
         private void ShowPulseGuiding()
         {
+            double rate = iDriver.GuideRateAscension;
+            if (rate == 0.0)
+            {
+                txtRaPulseRate.Text = "";
+            }
+            else
+            {
+                txtRaPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
+            }
+
+            rate = iDriver.GuideRateDeclination;
+            if (rate == 0.0)
+            {
+                txtDecPulseRate.Text = "";
+            }
+            else
+            {
+                txtDecPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
+            }
             
         }
 
@@ -47,7 +72,7 @@ namespace AscomGuiding
         {
             iServer = new ScopeServer.GuidingServer();
             iServer.Port = _port;
-            iServer.Driver = _driver;
+            iServer.Driver = iDriver;
 
             iServer.OnStatusMessage += new ScopeServer.GuidingServer.StatusMessageHandler(DoError);
             iServer.OnMessageReceived += new ScopeServer.GuidingServer.ReceivedMessageHandler(ShowMessage);
@@ -83,18 +108,18 @@ namespace AscomGuiding
 
         private void btnSetup_Click(object sender, EventArgs e)
         {
-            _driver.Setup();
+            iDriver.Setup();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_driver != null)
+            if (iDriver != null)
             {
-                _driver.Disconnect();
+                iDriver.Dispose();
             }
         }
 
-        private void portToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnChangePort_Click(object sender, EventArgs e)
         {
             PortDialog dialog = new PortDialog();
             dialog.Port = _port;
@@ -103,9 +128,11 @@ namespace AscomGuiding
                 if (dialog.Port != _port && iServer != null)
                 {
                     _port = dialog.Port;
+                    txtPort.Text = _port.ToString();
                     iServer.Start();
                 }
             }
+
         }
     }
 }
