@@ -29,40 +29,33 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblDriver = new System.Windows.Forms.Label();
             this.btnSelectDriver = new System.Windows.Forms.Button();
             this.txtSelectedDriver = new System.Windows.Forms.TextBox();
             this.btnSetup = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.portToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtError = new System.Windows.Forms.TextBox();
             this.iTelescopeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grpPulseGuiding = new System.Windows.Forms.GroupBox();
-            this.txtRaPulseRate = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtDecPulseRate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
+            this.txtRaPulseRate = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnChangePort = new System.Windows.Forms.Button();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).BeginInit();
             this.grpPulseGuiding.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblDriver
-            // 
-            this.lblDriver.AutoSize = true;
-            this.lblDriver.Location = new System.Drawing.Point(13, 53);
-            this.lblDriver.Name = "lblDriver";
-            this.lblDriver.Size = new System.Drawing.Size(35, 13);
-            this.lblDriver.TabIndex = 0;
-            this.lblDriver.Text = "Driver";
             // 
             // btnSelectDriver
             // 
-            this.btnSelectDriver.Location = new System.Drawing.Point(156, 76);
+            this.btnSelectDriver.Location = new System.Drawing.Point(111, 39);
             this.btnSelectDriver.Name = "btnSelectDriver";
             this.btnSelectDriver.Size = new System.Drawing.Size(55, 23);
             this.btnSelectDriver.TabIndex = 1;
@@ -72,7 +65,7 @@
             // 
             // txtSelectedDriver
             // 
-            this.txtSelectedDriver.Location = new System.Drawing.Point(54, 50);
+            this.txtSelectedDriver.Location = new System.Drawing.Point(9, 13);
             this.txtSelectedDriver.Name = "txtSelectedDriver";
             this.txtSelectedDriver.ReadOnly = true;
             this.txtSelectedDriver.Size = new System.Drawing.Size(157, 20);
@@ -81,7 +74,7 @@
             // btnSetup
             // 
             this.btnSetup.Enabled = false;
-            this.btnSetup.Location = new System.Drawing.Point(54, 76);
+            this.btnSetup.Location = new System.Drawing.Point(9, 39);
             this.btnSetup.Name = "btnSetup";
             this.btnSetup.Size = new System.Drawing.Size(75, 23);
             this.btnSetup.TabIndex = 6;
@@ -89,45 +82,16 @@
             this.btnSetup.UseVisualStyleBackColor = true;
             this.btnSetup.Click += new System.EventHandler(this.btnSetup_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(255, 24);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.portToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // portToolStripMenuItem
-            // 
-            this.portToolStripMenuItem.Name = "portToolStripMenuItem";
-            this.portToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.portToolStripMenuItem.Text = "Port...";
-            this.portToolStripMenuItem.Click += new System.EventHandler(this.portToolStripMenuItem_Click);
-            // 
             // txtError
             // 
-            this.txtError.Location = new System.Drawing.Point(98, 114);
+            this.txtError.Location = new System.Drawing.Point(44, 41);
             this.txtError.Name = "txtError";
-            this.txtError.Size = new System.Drawing.Size(146, 20);
+            this.txtError.Size = new System.Drawing.Size(134, 20);
             this.txtError.TabIndex = 10;
-            // 
-            // iTelescopeBindingSource
-            // 
-            //his.iTelescopeBindingSource.DataSource = typeof(ASCOM.Interface.ITelescope);
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(13, 162);
+            this.txtMessage.Location = new System.Drawing.Point(5, 83);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(172, 20);
             this.txtMessage.TabIndex = 11;
@@ -135,16 +99,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 117);
+            this.label1.Location = new System.Drawing.Point(6, 44);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Server Status";
+            this.label1.Text = "Status";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 146);
+            this.label2.Location = new System.Drawing.Point(6, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 13);
             this.label2.TabIndex = 13;
@@ -156,35 +120,19 @@
             this.grpPulseGuiding.Controls.Add(this.label4);
             this.grpPulseGuiding.Controls.Add(this.txtRaPulseRate);
             this.grpPulseGuiding.Controls.Add(this.label3);
-            this.grpPulseGuiding.Enabled = false;
-            this.grpPulseGuiding.Location = new System.Drawing.Point(13, 198);
+            this.grpPulseGuiding.Location = new System.Drawing.Point(5, 69);
             this.grpPulseGuiding.Name = "grpPulseGuiding";
             this.grpPulseGuiding.Size = new System.Drawing.Size(172, 79);
             this.grpPulseGuiding.TabIndex = 14;
             this.grpPulseGuiding.TabStop = false;
             this.grpPulseGuiding.Text = "Pulse Guiding";
             // 
-            // txtRaPulseRate
-            // 
-            this.txtRaPulseRate.Location = new System.Drawing.Point(35, 17);
-            this.txtRaPulseRate.Name = "txtRaPulseRate";
-            this.txtRaPulseRate.Size = new System.Drawing.Size(100, 20);
-            this.txtRaPulseRate.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "RA";
-            // 
             // txtDecPulseRate
             // 
             this.txtDecPulseRate.Location = new System.Drawing.Point(35, 43);
             this.txtDecPulseRate.Name = "txtDecPulseRate";
-            this.txtDecPulseRate.Size = new System.Drawing.Size(100, 20);
+            this.txtDecPulseRate.ReadOnly = true;
+            this.txtDecPulseRate.Size = new System.Drawing.Size(60, 20);
             this.txtDecPulseRate.TabIndex = 3;
             // 
             // label4
@@ -196,46 +144,107 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "DEC";
             // 
+            // txtRaPulseRate
+            // 
+            this.txtRaPulseRate.Location = new System.Drawing.Point(35, 17);
+            this.txtRaPulseRate.Name = "txtRaPulseRate";
+            this.txtRaPulseRate.ReadOnly = true;
+            this.txtRaPulseRate.Size = new System.Drawing.Size(60, 20);
+            this.txtRaPulseRate.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(22, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "RA";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnChangePort);
+            this.groupBox1.Controls.Add(this.txtPort);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtError);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtMessage);
+            this.groupBox1.Location = new System.Drawing.Point(6, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(201, 112);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Server";
+            // 
+            // btnChangePort
+            // 
+            this.btnChangePort.Location = new System.Drawing.Point(103, 15);
+            this.btnChangePort.Name = "btnChangePort";
+            this.btnChangePort.Size = new System.Drawing.Size(75, 23);
+            this.btnChangePort.TabIndex = 16;
+            this.btnChangePort.Text = "Change";
+            this.btnChangePort.UseVisualStyleBackColor = true;
+            this.btnChangePort.Click += new System.EventHandler(this.btnChangePort_Click);
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(44, 17);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.ReadOnly = true;
+            this.txtPort.Size = new System.Drawing.Size(45, 20);
+            this.txtPort.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Port";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.grpPulseGuiding);
+            this.groupBox2.Controls.Add(this.btnSetup);
+            this.groupBox2.Controls.Add(this.btnSelectDriver);
+            this.groupBox2.Controls.Add(this.txtSelectedDriver);
+            this.groupBox2.Location = new System.Drawing.Point(6, 140);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(201, 160);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Driver";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 290);
-            this.Controls.Add(this.grpPulseGuiding);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtMessage);
-            this.Controls.Add(this.txtError);
-            this.Controls.Add(this.btnSetup);
-            this.Controls.Add(this.txtSelectedDriver);
-            this.Controls.Add(this.btnSelectDriver);
-            this.Controls.Add(this.lblDriver);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(216, 311);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "ASCOM Guiding";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).EndInit();
             this.grpPulseGuiding.ResumeLayout(false);
             this.grpPulseGuiding.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblDriver;
         private System.Windows.Forms.Button btnSelectDriver;
         private System.Windows.Forms.TextBox txtSelectedDriver;
         private System.Windows.Forms.Button btnSetup;
         private System.Windows.Forms.BindingSource iTelescopeBindingSource;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem portToolStripMenuItem;
         private System.Windows.Forms.TextBox txtError;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Label label1;
@@ -245,6 +254,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDecPulseRate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnChangePort;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
