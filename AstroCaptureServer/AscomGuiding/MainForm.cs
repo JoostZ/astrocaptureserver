@@ -41,20 +41,30 @@ namespace AstroCaptureServer
             /// <param name="e">arguments associated with the event</param>
             private void btnSelectDriver_Click(object sender, EventArgs e)
             {
-
-                string ProgId = Telescope.Choose("");
-                if (iDriver != null)
+                try
                 {
-                    iDriver.Dispose();
+                    string ProgId = Telescope.Choose("");
+                    if (ProgId != "")
+                    {
+                        if (iDriver != null)
+                        {
+                            iDriver.Dispose();
+                        }
+
+                        iDriver = new AscomDriver(ProgId);
+                        iServer.Driver = iDriver;
+                        btnSetup.Enabled = true;
+
+
+                        txtSelectedDriver.Text = iDriver.Name;
+
+                        ShowPulseGuiding();
+                    }
                 }
-                iDriver = new AscomDriver(ProgId);
-                iServer.Driver = iDriver;
-                btnSetup.Enabled = true;
-
-                txtSelectedDriver.Text = iDriver.Name;
-
-                ShowPulseGuiding();
-
+                catch
+                {
+                    // Ignore failure
+                }
             }
 
             /// <summary>

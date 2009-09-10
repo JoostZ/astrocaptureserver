@@ -38,7 +38,10 @@ namespace AstroCaptureServer
             {
                 iTelescope = new Telescope(ProgId);
                 iTelescope.Connected = true;
-                iTelescope.Unpark();
+                if (iTelescope.CanUnpark)
+                {
+                    iTelescope.Unpark();
+                }
             }
 
             /**
@@ -68,7 +71,10 @@ namespace AstroCaptureServer
             {
                 if (!this.iDisposed)
                 {
-                    iTelescope.Park();
+                    if (iTelescope.CanPark)
+                    {
+                        iTelescope.Park();
+                    }
                     iTelescope.Connected = false;
 
                     // If disposing equals true, dispose all managed
