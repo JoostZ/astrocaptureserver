@@ -8,7 +8,7 @@
     <ProjectGuid>{6E035942-4EDC-403A-B768-6CDE536BDD96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScopeServer</RootNamespace>
+    <RootNamespace>AstroCaptureServer</RootNamespace>
     <AssemblyName>ScopeServer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

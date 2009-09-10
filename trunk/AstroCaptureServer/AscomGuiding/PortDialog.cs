@@ -7,25 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AscomGuiding
+namespace AstroCaptureServer
 {
-    public partial class PortDialog : Form
+    namespace AscomGuiding
     {
-
-        public PortDialog()
+        public partial class PortDialog : Form
         {
-            InitializeComponent();
-        }
 
-        public int Port
-        {
-            get
+            public PortDialog()
             {
-                return Convert.ToInt32(txtPort.Text);
+                InitializeComponent();
             }
-            set
+
+            public int Port
             {
-                txtPort.Text = value.ToString();
+                get
+                {
+                    return Convert.ToInt32(txtPort.Text);
+                }
+                set
+                {
+                    txtPort.Text = value.ToString();
+                }
             }
         }
     }
