@@ -9,130 +9,148 @@ using System.Windows.Forms;
 
 using ASCOM.DriverAccess;
 
-using ScopeServer;
+using AstroCaptureServer.Server;
+using AstroCaptureServer.Driver;
 
-namespace AscomGuiding
+namespace AstroCaptureServer
 {
-    public partial class MainForm : Form
+    namespace AscomGuiding
     {
-        private AscomDriver iDriver = null;
-        private ScopeServer.GuidingServer iServer = null;
-        private int _port = 4242;
- 
-        public MainForm()
+        /// <summary>
+        /// AstroCapture Guiding application
+        /// </summary>
+        public partial class MainForm : Form
         {
-            InitializeComponent();
-            txtPort.Text  = _port.ToString();
-            SetupServer();
-        }
+            private AscomDriver iDriver = null;
+            private AstroCaptureServer.Server.GuidingServer iServer = null;
 
-        private void btnSelectDriver_Click(object sender, EventArgs e)
-        {
-
-            string ProgId = Telescope.Choose("");
-            if (iDriver != null)
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            public MainForm()
             {
-                iDriver.Dispose();
-            }
-            iDriver = new AscomDriver(ProgId);
-            iServer.Driver = iDriver;
-            btnSetup.Enabled = true;
-
-            txtSelectedDriver.Text = iDriver.Name;
-
-            ShowPulseGuiding();
-            
-        }
-
-        private void ShowPulseGuiding()
-        {
-            double rate = iDriver.GuideRateAscension;
-            if (rate == 0.0)
-            {
-                txtRaPulseRate.Text = "";
-            }
-            else
-            {
-                txtRaPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
+                InitializeComponent();
+                SetupServer();
+                txtPort.Text = iServer.Port.ToString();
             }
 
-            rate = iDriver.GuideRateDeclination;
-            if (rate == 0.0)
+            /// <summary>
+            /// Select an ASCOM driver
+            /// </summary>
+            /// <param name="sender">sender of the event</param>
+            /// <param name="e">arguments associated with the event</param>
+            private void btnSelectDriver_Click(object sender, EventArgs e)
             {
-                txtDecPulseRate.Text = "";
-            }
-            else
-            {
-                txtDecPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
-            }
-            
-        }
 
-        private void SetupServer()
-        {
-            iServer = new ScopeServer.GuidingServer();
-            iServer.Port = _port;
-            iServer.Driver = iDriver;
-
-            iServer.OnStatusMessage += new ScopeServer.GuidingServer.StatusMessageHandler(DoError);
-            iServer.OnMessageReceived += new ScopeServer.GuidingServer.ReceivedMessageHandler(ShowMessage);
-            iServer.Start();
-        }
-
-        private delegate void SetTextCallback(String result);
-        public void DoError(String msg)
-        {
-            if (this.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(DoError);
-                this.Invoke(d, new object[] { msg });
-            }
-            else
-            {
-                txtError.Text = msg;
-            }
-        }
-
-        public void ShowMessage(String msg)
-        {
-            if (this.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(ShowMessage);
-                this.Invoke(d, new object[] { msg });
-            }
-            else
-            {
-                txtMessage.Text = msg;
-            }
-        }
-
-        private void btnSetup_Click(object sender, EventArgs e)
-        {
-            iDriver.Setup();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (iDriver != null)
-            {
-                iDriver.Dispose();
-            }
-        }
-
-        private void btnChangePort_Click(object sender, EventArgs e)
-        {
-            PortDialog dialog = new PortDialog();
-            dialog.Port = _port;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                if (dialog.Port != _port && iServer != null)
+                string ProgId = Telescope.Choose("");
+                if (iDriver != null)
                 {
-                    _port = dialog.Port;
-                    txtPort.Text = _port.ToString();
-                    iServer.Start();
+                    iDriver.Dispose();
+                }
+                iDriver = new AscomDriver(ProgId);
+                iServer.Driver = iDriver;
+                btnSetup.Enabled = true;
+
+                txtSelectedDriver.Text = iDriver.Name;
+
+                ShowPulseGuiding();
+
+            }
+
+            /// <summary>
+            /// Display data on PulseGuiding
+            /// </summary>
+            private void ShowPulseGuiding()
+            {
+                double rate = iDriver.GuideRateAscension;
+                if (rate == 0.0)
+                {
+                    txtRaPulseRate.Text = "";
+                }
+                else
+                {
+                    txtRaPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
+                }
+
+                rate = iDriver.GuideRateDeclination;
+                if (rate == 0.0)
+                {
+                    txtDecPulseRate.Text = "";
+                }
+                else
+                {
+                    txtDecPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
+                }
+
+            }
+
+            /// <summary>
+            /// Initialize the Guiding sever
+            /// </summary>
+            private void SetupServer()
+            {
+                iServer = new GuidingServer();
+                iServer.Driver = iDriver;
+
+                iServer.OnStatusMessage += new GuidingServer.StatusMessageHandler(DoError);
+                iServer.OnMessageReceived += new GuidingServer.StatusMessageHandler(ShowMessage);
+            }
+
+            private delegate void SetTextCallback(String result);
+            public void DoError(String msg)
+            {
+                if (this.InvokeRequired)
+                {
+                    SetTextCallback d = new SetTextCallback(DoError);
+                    this.Invoke(d, new object[] { msg });
+                }
+                else
+                {
+                    txtError.Text = msg;
                 }
             }
 
+            public void ShowMessage(String msg)
+            {
+                if (this.InvokeRequired)
+                {
+                    SetTextCallback d = new SetTextCallback(ShowMessage);
+                    this.Invoke(d, new object[] { msg });
+                }
+                else
+                {
+                    txtMessage.Text = msg;
+                }
+            }
+
+            private void btnSetup_Click(object sender, EventArgs e)
+            {
+                iDriver.Setup();
+            }
+
+            private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+            {
+                if (iDriver != null)
+                {
+                    iDriver.Dispose();
+                }
+            }
+
+            private void btnChangePort_Click(object sender, EventArgs e)
+            {
+                PortDialog dialog = new PortDialog();
+                dialog.Port = iServer.Port;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (dialog.Port != iServer.Port)
+                    {
+                        iServer.Port = dialog.Port;
+                        txtPort.Text = iServer.Port.ToString();
+                        iServer.ReStart();
+                    }
+                }
+
+            }
         }
     }
 }
