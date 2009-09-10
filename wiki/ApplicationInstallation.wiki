@@ -1,3 +1,4 @@
+#labels Featured
 Installation of !AstroCaptureServer application 
 
 The !AstroCaptureServer does not require an installation. You just download the zip file and unzip it to a folder you want. Then you run !AscomGuiding.
