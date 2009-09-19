@@ -177,6 +177,11 @@ namespace AstroCaptureServer
                 {
                     OnStatusMessage("Waiting for a connection...");
                 }
+
+                if (OnMessageReceived != null)
+                {
+                    OnMessageReceived("");
+                }
                 iListener.BeginAccept(
                     new AsyncCallback(AcceptCallback),
                     iListener);
@@ -234,6 +239,9 @@ namespace AstroCaptureServer
             // M12345678 = Time in [ms] since start of client's thread
             // Rs1234    = Time in [ms] and direction of RA guiding pulse
             // Ds1234    = Time in [ms] and direction of DE guiding pulse
+
+            DateTime iClientTime;
+            bool iTimeSet = false;
 
             private void ReadCallback(IAsyncResult ar)
             {
@@ -334,6 +342,20 @@ namespace AstroCaptureServer
                         Int32 timeStamp = Convert.ToInt32(Encoding.ASCII.GetString(iMessage.buffer, 1, 8));
                         raPuls = Convert.ToInt16(Encoding.ASCII.GetString(iMessage.buffer, raOffset + 1, 5));
                         dePuls = Convert.ToInt16(Encoding.ASCII.GetString(iMessage.buffer, decOffset + 1, 5));
+
+                        if (!iTimeSet)
+                        {
+                            iClientTime = DateTime.Now - TimeSpan.FromMilliseconds(timeStamp);
+                            iTimeSet = true;
+                        }
+
+                        Int32 timeDiff = (int)(DateTime.Now - iClientTime).TotalMilliseconds;
+                        Int32 delay = timeDiff - timeStamp;
+                        if (delay > 2000)
+                        {
+                            // 
+                            continue;
+                        }
                     }
                     catch
                     {

@@ -174,11 +174,11 @@ namespace AstroCaptureServer
                     if (raDuration < 0)
                     {
                         raDuration = -raDuration;
-                        direction = GuideDirections.guideWest;
+                        direction = GuideDirections.guideEast;
                     }
                     else
                     {
-                        direction = GuideDirections.guideEast;
+                        direction = GuideDirections.guideWest;
                     }
                     iTelescope.PulseGuide(direction, raDuration);
                 }
@@ -187,11 +187,11 @@ namespace AstroCaptureServer
                     if (decDuration < 0)
                     {
                         decDuration = -decDuration;
-                        direction = GuideDirections.guideSouth;
+                        direction = GuideDirections.guideNorth;
                     }
                     else
                     {
-                        direction = GuideDirections.guideNorth;
+                        direction = GuideDirections.guideSouth;
                     }
                     iTelescope.PulseGuide(direction, decDuration);
                 }

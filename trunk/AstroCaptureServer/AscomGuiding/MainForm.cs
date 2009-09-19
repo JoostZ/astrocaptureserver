@@ -57,41 +57,12 @@ namespace AstroCaptureServer
 
 
                         txtSelectedDriver.Text = iDriver.Name;
-
-                        ShowPulseGuiding();
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
                     // Ignore failure
                 }
-            }
-
-            /// <summary>
-            /// Display data on PulseGuiding
-            /// </summary>
-            private void ShowPulseGuiding()
-            {
-                double rate = iDriver.GuideRateAscension;
-                if (rate == 0.0)
-                {
-                    txtRaPulseRate.Text = "";
-                }
-                else
-                {
-                    txtRaPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
-                }
-
-                rate = iDriver.GuideRateDeclination;
-                if (rate == 0.0)
-                {
-                    txtDecPulseRate.Text = "";
-                }
-                else
-                {
-                    txtDecPulseRate.Text = ((int)(1.0 / (rate * 3.6))).ToString();
-                }
-
             }
 
             /// <summary>
