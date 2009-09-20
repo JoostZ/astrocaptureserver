@@ -35,7 +35,6 @@
                 this.txtSelectedDriver = new System.Windows.Forms.TextBox();
                 this.btnSetup = new System.Windows.Forms.Button();
                 this.txtError = new System.Windows.Forms.TextBox();
-                this.iTelescopeBindingSource = new System.Windows.Forms.BindingSource(this.components);
                 this.txtMessage = new System.Windows.Forms.TextBox();
                 this.label1 = new System.Windows.Forms.Label();
                 this.label2 = new System.Windows.Forms.Label();
@@ -44,14 +43,23 @@
                 this.txtPort = new System.Windows.Forms.TextBox();
                 this.label5 = new System.Windows.Forms.Label();
                 this.groupBox2 = new System.Windows.Forms.GroupBox();
-                ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).BeginInit();
+                this.pictureBox1 = new System.Windows.Forms.PictureBox();
+                this.iTelescopeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+                this.guidingServerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+                this.btnAbout = new System.Windows.Forms.Button();
+                this.btnClose = new System.Windows.Forms.Button();
+                this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
                 this.groupBox1.SuspendLayout();
                 this.groupBox2.SuspendLayout();
+                ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+                ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).BeginInit();
+                ((System.ComponentModel.ISupportInitialize)(this.guidingServerBindingSource)).BeginInit();
+                ((System.ComponentModel.ISupportInitialize)(this.mainFormBindingSource)).BeginInit();
                 this.SuspendLayout();
                 // 
                 // btnSelectDriver
                 // 
-                this.btnSelectDriver.Location = new System.Drawing.Point(111, 39);
+                this.btnSelectDriver.Location = new System.Drawing.Point(111, 50);
                 this.btnSelectDriver.Name = "btnSelectDriver";
                 this.btnSelectDriver.Size = new System.Drawing.Size(55, 23);
                 this.btnSelectDriver.TabIndex = 1;
@@ -61,7 +69,7 @@
                 // 
                 // txtSelectedDriver
                 // 
-                this.txtSelectedDriver.Location = new System.Drawing.Point(9, 13);
+                this.txtSelectedDriver.Location = new System.Drawing.Point(9, 19);
                 this.txtSelectedDriver.Name = "txtSelectedDriver";
                 this.txtSelectedDriver.ReadOnly = true;
                 this.txtSelectedDriver.Size = new System.Drawing.Size(157, 20);
@@ -70,7 +78,7 @@
                 // btnSetup
                 // 
                 this.btnSetup.Enabled = false;
-                this.btnSetup.Location = new System.Drawing.Point(9, 39);
+                this.btnSetup.Location = new System.Drawing.Point(9, 50);
                 this.btnSetup.Name = "btnSetup";
                 this.btnSetup.Size = new System.Drawing.Size(75, 23);
                 this.btnSetup.TabIndex = 6;
@@ -113,6 +121,7 @@
                 // groupBox1
                 // 
                 this.groupBox1.AutoSize = true;
+                this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
                 this.groupBox1.Controls.Add(this.btnChangePort);
                 this.groupBox1.Controls.Add(this.txtPort);
                 this.groupBox1.Controls.Add(this.label5);
@@ -122,7 +131,7 @@
                 this.groupBox1.Controls.Add(this.txtMessage);
                 this.groupBox1.Location = new System.Drawing.Point(6, 12);
                 this.groupBox1.Name = "groupBox1";
-                this.groupBox1.Size = new System.Drawing.Size(211, 122);
+                this.groupBox1.Size = new System.Drawing.Size(209, 122);
                 this.groupBox1.TabIndex = 15;
                 this.groupBox1.TabStop = false;
                 this.groupBox1.Text = "Bridge Interface Server";
@@ -158,15 +167,55 @@
                 // 
                 this.groupBox2.AutoSize = true;
                 this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                this.groupBox2.Controls.Add(this.pictureBox1);
                 this.groupBox2.Controls.Add(this.btnSetup);
                 this.groupBox2.Controls.Add(this.btnSelectDriver);
                 this.groupBox2.Controls.Add(this.txtSelectedDriver);
-                this.groupBox2.Location = new System.Drawing.Point(6, 140);
+                this.groupBox2.Location = new System.Drawing.Point(6, 150);
                 this.groupBox2.Name = "groupBox2";
-                this.groupBox2.Size = new System.Drawing.Size(172, 81);
+                this.groupBox2.Size = new System.Drawing.Size(242, 94);
                 this.groupBox2.TabIndex = 4;
                 this.groupBox2.TabStop = false;
                 this.groupBox2.Text = "ASCOM Driver";
+                // 
+                // pictureBox1
+                // 
+                this.pictureBox1.Image = global::AscomGuiding.Properties.Resources.ASCOM;
+                this.pictureBox1.Location = new System.Drawing.Point(188, 19);
+                this.pictureBox1.Name = "pictureBox1";
+                this.pictureBox1.Size = new System.Drawing.Size(48, 56);
+                this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+                this.pictureBox1.TabIndex = 16;
+                this.pictureBox1.TabStop = false;
+                this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+                // 
+                // guidingServerBindingSource
+                // 
+                this.guidingServerBindingSource.DataSource = typeof(AstroCaptureServer.Server.GuidingServer);
+                // 
+                // btnAbout
+                // 
+                this.btnAbout.Location = new System.Drawing.Point(15, 260);
+                this.btnAbout.Name = "btnAbout";
+                this.btnAbout.Size = new System.Drawing.Size(75, 23);
+                this.btnAbout.TabIndex = 16;
+                this.btnAbout.Text = "About";
+                this.btnAbout.UseVisualStyleBackColor = true;
+                this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+                // 
+                // btnClose
+                // 
+                this.btnClose.Location = new System.Drawing.Point(117, 259);
+                this.btnClose.Name = "btnClose";
+                this.btnClose.Size = new System.Drawing.Size(75, 23);
+                this.btnClose.TabIndex = 17;
+                this.btnClose.Text = "Close";
+                this.btnClose.UseVisualStyleBackColor = true;
+                this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+                // 
+                // mainFormBindingSource
+                // 
+                this.mainFormBindingSource.DataSource = typeof(AstroCaptureServer.AscomGuiding.MainForm);
                 // 
                 // MainForm
                 // 
@@ -174,19 +223,23 @@
                 this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                 this.AutoSize = true;
                 this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                this.ClientSize = new System.Drawing.Size(226, 230);
+                this.ClientSize = new System.Drawing.Size(298, 421);
+                this.Controls.Add(this.btnClose);
+                this.Controls.Add(this.btnAbout);
                 this.Controls.Add(this.groupBox1);
                 this.Controls.Add(this.groupBox2);
                 this.MaximizeBox = false;
-                this.MinimizeBox = false;
                 this.Name = "MainForm";
                 this.Text = "AstroCapture ASCOM Guiding";
                 this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-                ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).EndInit();
                 this.groupBox1.ResumeLayout(false);
                 this.groupBox1.PerformLayout();
                 this.groupBox2.ResumeLayout(false);
                 this.groupBox2.PerformLayout();
+                ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+                ((System.ComponentModel.ISupportInitialize)(this.iTelescopeBindingSource)).EndInit();
+                ((System.ComponentModel.ISupportInitialize)(this.guidingServerBindingSource)).EndInit();
+                ((System.ComponentModel.ISupportInitialize)(this.mainFormBindingSource)).EndInit();
                 this.ResumeLayout(false);
                 this.PerformLayout();
 
@@ -207,6 +260,11 @@
             private System.Windows.Forms.TextBox txtPort;
             private System.Windows.Forms.Label label5;
             private System.Windows.Forms.GroupBox groupBox2;
+            private System.Windows.Forms.BindingSource mainFormBindingSource;
+            private System.Windows.Forms.BindingSource guidingServerBindingSource;
+            private System.Windows.Forms.PictureBox pictureBox1;
+            private System.Windows.Forms.Button btnAbout;
+            private System.Windows.Forms.Button btnClose;
         }
     }
 }
