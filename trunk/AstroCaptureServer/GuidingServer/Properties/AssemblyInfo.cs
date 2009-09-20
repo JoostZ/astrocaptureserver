@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ScopeServer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("GuidingServer")]
+[assembly: AssemblyDescription("Generic server to receive and interpret the BridgeLink commands from wxAstroCapture")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
-[assembly: AssemblyProduct("ScopeServer")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2009")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("AstroCapture Server")]
+[assembly: AssemblyCopyright("Copyright © Joost Zalmstra")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

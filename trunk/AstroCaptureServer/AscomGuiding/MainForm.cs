@@ -24,14 +24,30 @@ namespace AstroCaptureServer
             private AscomDriver iDriver = null;
             private AstroCaptureServer.Server.GuidingServer iServer = null;
 
+            public Int16 UpdatePeriod { get; set; }
+
+            public AstroCaptureServer.Server.GuidingServer Server
+            {
+                get
+                {
+                    return iServer;
+                }
+                set
+                {
+                    iServer = value;
+                }
+            }
+            
+
             /// <summary>
             /// Constructor
             /// </summary>
             public MainForm()
             {
                 InitializeComponent();
+                mainFormBindingSource.DataSource = this;
                 SetupServer();
-                txtPort.Text = iServer.Port.ToString();
+                txtPort.Text = Server.Port.ToString();
             }
 
             /// <summary>
@@ -55,13 +71,12 @@ namespace AstroCaptureServer
                         iServer.Driver = iDriver;
                         btnSetup.Enabled = true;
 
-
                         txtSelectedDriver.Text = iDriver.Name;
                     }
                 }
                 catch(Exception ex)
                 {
-                    // Ignore failure
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -75,6 +90,8 @@ namespace AstroCaptureServer
 
                 iServer.OnStatusMessage += new GuidingServer.StatusMessageHandler(DoError);
                 iServer.OnMessageReceived += new GuidingServer.StatusMessageHandler(ShowMessage);
+
+                Server.UpdatePeriod = 2000;
             }
 
             private delegate void SetTextCallback(String result);
@@ -131,6 +148,34 @@ namespace AstroCaptureServer
                     }
                 }
 
+            }
+
+            private void pictureBox1_Click(object sender, EventArgs e)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start("http://ascom-standards.org/");
+                }
+                catch (System.ComponentModel.Win32Exception noBrowser)
+                {
+                    if (noBrowser.ErrorCode == -2147467259)
+                        MessageBox.Show(noBrowser.Message);
+                }
+                catch (System.Exception other)
+                {
+                    MessageBox.Show(other.Message);
+                }
+            }
+
+            private void btnAbout_Click(object sender, EventArgs e)
+            {
+                AboutBox dialog = new AboutBox();
+                dialog.ShowDialog();
+            }
+
+            private void btnClose_Click(object sender, EventArgs e)
+            {
+                this.Close();
             }
         }
     }

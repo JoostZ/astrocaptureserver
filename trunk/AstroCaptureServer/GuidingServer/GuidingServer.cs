@@ -182,6 +182,7 @@ namespace AstroCaptureServer
                 {
                     OnMessageReceived("");
                 }
+                iTimeSet = false;
                 iListener.BeginAccept(
                     new AsyncCallback(AcceptCallback),
                     iListener);
@@ -239,6 +240,15 @@ namespace AstroCaptureServer
             // M12345678 = Time in [ms] since start of client's thread
             // Rs1234    = Time in [ms] and direction of RA guiding pulse
             // Ds1234    = Time in [ms] and direction of DE guiding pulse
+
+            DateTime iClientTime;
+            bool iTimeSet = false;
+            Int64 iThreadStart;
+
+            public Int16 UpdatePeriod { get; set; }
+
+            public delegate void DelayHandler(Int64 delay);
+            public event DelayHandler OnDelayReceived;
 
             private void ReadCallback(IAsyncResult ar)
             {
@@ -339,6 +349,35 @@ namespace AstroCaptureServer
                         Int32 timeStamp = Convert.ToInt32(Encoding.ASCII.GetString(iMessage.buffer, 1, 8));
                         raPuls = Convert.ToInt16(Encoding.ASCII.GetString(iMessage.buffer, raOffset + 1, 5));
                         dePuls = Convert.ToInt16(Encoding.ASCII.GetString(iMessage.buffer, decOffset + 1, 5));
+
+                        Int64 delay = 0;
+                        if (!iTimeSet)
+                        {
+                            iThreadStart = GetLocalMillis() - timeStamp;
+                            iClientTime = DateTime.Now - TimeSpan.FromMilliseconds(timeStamp);
+                            iTimeSet = true;
+                            delay = 0;
+                        }
+                        else
+                        {
+
+
+                            Int32 timeDiff = (int)(DateTime.Now - iClientTime).TotalMilliseconds;
+                            Int64 actualMessageTime = GetLocalMillis() - iThreadStart;
+                            delay = actualMessageTime - timeStamp;
+                        }
+
+                        if (OnDelayReceived != null)
+                        {
+                            OnDelayReceived(delay);
+                        }
+
+                        if (delay > UpdatePeriod)
+                        {
+                            // 
+                            iMessage.index = 0;
+                            continue;
+                        }
                     }
                     catch
                     {
@@ -359,6 +398,10 @@ namespace AstroCaptureServer
 
 
 
+            Int64 GetLocalMillis()
+            {
+                return DateTime.Now.Ticks / 10000;
+            }
 
 
             private void ReadBuffer(StateObject aState)

@@ -25,6 +25,10 @@ namespace AstroCaptureServer
             public event StartStopHandler OnStartDe = null;
             public event StartStopHandler OnStopDe = null;
 
+            public delegate void PulseHandler(Int32 duration);
+            public event PulseHandler OnRaPulse;
+            public event PulseHandler OnDePulse;
+
             private Telescope iTelescope;
 
             /**
@@ -71,10 +75,10 @@ namespace AstroCaptureServer
             {
                 if (!this.iDisposed)
                 {
-                    if (iTelescope.CanPark)
-                    {
-                        iTelescope.Park();
-                    }
+                    //if (iTelescope.CanPark)
+                    //{
+                    //    iTelescope.Park();
+                    //}
                     iTelescope.Connected = false;
 
                     // If disposing equals true, dispose all managed
@@ -171,6 +175,7 @@ namespace AstroCaptureServer
                 GuideDirections direction;
                 if (raDuration != 0)
                 {
+                    Int32 signedDuration = raDuration;
                     if (raDuration < 0)
                     {
                         raDuration = -raDuration;
@@ -180,10 +185,19 @@ namespace AstroCaptureServer
                     {
                         direction = GuideDirections.guideWest;
                     }
+                    if (OnRaPulse != null)
+                    {
+                        OnRaPulse(signedDuration);
+                    }
                     iTelescope.PulseGuide(direction, raDuration);
+                }
+                else if (OnRaPulse != null)
+                {
+                    OnRaPulse(0);
                 }
                 if (decDuration != 0)
                 {
+                    Int32 signedDuration = decDuration;
                     if (decDuration < 0)
                     {
                         decDuration = -decDuration;
@@ -193,7 +207,15 @@ namespace AstroCaptureServer
                     {
                         direction = GuideDirections.guideSouth;
                     }
+                    if (OnDePulse != null)
+                    {
+                        OnDePulse(signedDuration);
+                    }
                     iTelescope.PulseGuide(direction, decDuration);
+                }
+                else if (OnDePulse != null)
+                {
+                    OnDePulse(0);
                 }
             }
 
