@@ -1,3 +1,4 @@
+#labels Featured
 This page gives a short summary of the use of AstroCaptureServer
 
 = Introduction =
@@ -13,4 +14,3 @@ Next start wxAstroCapture and select the Bridge Link (on Options->Guiding interf
 Now you should be able to start Auto Guiding from wxAstroCapture and the server will receive messages (shown in the Message received field) and the telescope should move to keep the selected star in the same position.
 
 See the [http://arnholm.org/astro/software/wxAstroCapture/ wxAstroCapture] website for information on how to use Auto Guiding from wxAstroCapture.
-
