@@ -27,12 +27,12 @@ Connect to the webcam. Optionally activate long exposure mode. Make sure a star 
 
 Now you must determine the proper lower cutoff level in order to have wxAstrocapture recognize the guide star. A good starting value is 20-30 less than the value shown as the level in the exposure meter in the Record Tab. In most cases this will be a proper value. Specify this value as lower cutoff level in _Options-->Guiding-->Lower Cutoff Level_. Click OK. 
 
-First, you need to do an autocalibration. This determines 
+Next go to the Guide Tab and click _Pick Guide Star_. Click on the star image you want to use as the autoguide star. If the Lower Cutoff level is OK, a small square will be drawn around the guiding star. If the Lower cutoff level is too high, this error message will appear _"Could not lock onto the selected guide star"_. If the Lower cutoff level is too low, the square will be drawn, but it will move around the screen as it cannot recognize the guide star. 
+Change he lower cutoff level as needed to obtain a lock on the selected guide star.
+
+First, you need to do an autocalibration. This is a one-time calibration that need not be repeated as long as the webcam is not moved and the telescope is not changed. Autocalibration determines:
   # the angle between the webcam's long axis and the E-W direction. 
   # the scale of the webcam image: arcsec per pixel
 Both values are needed to send the proper correction messages to the telescope drives through the Astrocaptureserver.
 
 _(add autocalibration explanation here)_
-
-Next go to the Guide Tab and click _Pick Guide Star_. Click on the star image you want to use as the autoguide star. If the Lower Cutoff level is OK, a small square will be drawn around the guiding star. If the Lower cutoff level is too high, this error message will appear _"Could not lock onto the selected guide star"_. If the Lower cutoff level is too low, the square will be drawn, but it will move around the screen as it cannot recognize the guide star. 
-Change he lower cutoff level as needed to obtain a lock on the selected guide star.
