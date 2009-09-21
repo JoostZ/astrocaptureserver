@@ -20,7 +20,7 @@ To establish communication between Astrocaptureserver (server) and wxAstrocaptur
 
 The Ascom interface is started from within Astrocaptureserver. Click _Select_ to activate the ASCOM Telescope Chooser window. Choose the type of telescope you have in the drop-down box (its ASCOM driver must be installed on your computer) and click _OK_. The connection with your telescope mount is established and Astrocaptureserver will start forwarding the autoguiding messages it receives from wxAstrocapture to the ASCOM driver
 
-= Autoguiding from wxAstrocapture =
+= Autoguiding in wxAstrocapture =
 
 Start wxAstroCapture and make sure the Bridge Link (on Options->Guiding interface tab) is selected. 
 Connect to the webcam. Optionally activate long exposure mode. Make sure a star is visible in the shown webcam frame. 
