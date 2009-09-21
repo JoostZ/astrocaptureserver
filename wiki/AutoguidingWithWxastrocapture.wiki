@@ -6,6 +6,10 @@ How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 !AstrocaptureServer is Windows software intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/ wxAstrocapture].
 !AstrocaptureServer serves as a TCP/IP server receiving Bridge Interface guiding commands from wxAstroCapture. It forwards the guiding instruction to any ASCOM supported telescope controller using its ASCOM driver. 
 
+= The Ascom interface =
+
+The Ascom interface is started from within Astrocaptureserver. Click _Select_ to activate the ASCOM Telescope Chooser window. Choose the type of telescope you have in the drop-down box (its ASCOM driver must be installed on your computer) and click _OK_. The connection with your telescope mount is established and Astrocaptureserver will start forwarding the autoguiding messages to the ASCOM driver when received from wxAstrocapture.
+
 = The TCP/IP interface =
 
 Astrocaptureserver can run on the same computer as wxAstroCapture, but also on another computer in a network. You can for example run wxAstroCapture on Linux and Astrocaptureserver on Windows. 
@@ -18,10 +22,6 @@ The left image above shows how to specify the server's TCP/IP address and port i
 To establish communication between Astrocaptureserver (server) and wxAstrocapture (client) the server should be started *first*. After starting autoguiding in wxAstrocapture the connection is established and Astrocaptureserver will receive autguiding messages. See the image below:
 
 http://astrocaptureserver.googlecode.com/svn/images/ServerManual/image3.JPG 
-
-= The Ascom interface =
-
-The Ascom interface is started from within Astrocaptureserver. Click _Select_ to activate the ASCOM Telescope Chooser window. Choose the type of telescope you have in the drop-down box (its ASCOM driver must be installed on your computer) and click _OK_. The connection with your telescope mount is established and Astrocaptureserver will start forwarding the autoguiding messages it receives from wxAstrocapture to the ASCOM driver
 
 = Autoguiding in wxAstrocapture =
 
