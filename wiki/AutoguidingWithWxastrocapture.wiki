@@ -1,4 +1,4 @@
-#How to do Autoguiding with wxAstroCapture and Astrocaptureserver
+How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 
 = Introduction =
 
