@@ -26,4 +26,4 @@ Start wxAstroCapture and make sure the Bridge Link (on Options->Guiding interfac
 Connect to the webcam. Optionally activate long exposure mode. Make sure a star is visible in the shown webcam frame. 
 Now you must determine the proper lower cutoff level in order to have wxAstrocapture recognize the guide star. A good starting value is 20-30 less than the value shown as the leel in the exposure meter in the Record Tab. Specify this value as lower cutoff level in _Options-->Guiding-->Lower Cutoff Level_. Click OK. 
 
-Next go to the Guide Tab and click _Pick Guide Star_. Click on the star image you want to use as the autoguide star. 
+Next go to the Guide Tab and click _Pick Guide Star_. Click on the star image you want to use as the autoguide star. If the Lower Cutoff level is OK, a small square will be drawn around the guiding star. If the Lower cutoff level is too high, this error message will appear _"Could not lock onto the selected guide star"_. If the Lower cutoff level is too low, the square will be dran, but it will move around the screen as it cannot recognize the guide star. 
