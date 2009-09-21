@@ -10,7 +10,9 @@ How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 
 Astrocaptureserver can run on the same computer as wxAstroCapture, but also on another computer in a network. You can for example run wxAstroCapture on Linux and Astrocaptureserver on Windows. 
 To specify that Astrocaptureserver is running on the same computer as wxAstroCapture, specify localhost for the Bridge interface host in wxAstrocapture. Both programs use TCP/IP port 5618 by default for connections. You can alternatively specify the host as the IP-address or name of another computer in your network where Astrocaptureserver is running. 
-http://astrocaptureserver.googlecode.com/svn/images/ServerManual/image1.JPG shows how to specify the server's TCP/IP address and port in wxAstrocapture
+http://astrocaptureserver.googlecode.com/svn/images/ServerManual/image1.JPG 
+
+The image above shows how to specify the server's TCP/IP address and port in wxAstrocapture
 Image2 shows where to change the default TCP/IP port in Astrocaptureserver.
 
 To establish communication between Astrocaptureserver (server) and wxAstrocapture (client) the server should be started *first*. After starting autoguiding in wxAstrocapture the connection is established and Astrocaptureserver will receive autguiding messages. See Image3.
