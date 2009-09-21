@@ -2,9 +2,14 @@ How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 
 = Introduction =
 
-!AstrocaptureServer is intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/ wxAstrocapture] 
+!AstrocaptureServer is Windows software intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/ wxAstrocapture]
+!AstrocaptureServer serves as a TCP/IP server receiving Bridge Interface guiding commands from wxAstroCapture. It forwards the guiding instruction to any ASCOM supported telescope controller using its ASCOM driver. 
+Astrocaptureserver can run on the same computer as wxAstroCapture, but also on another computer in a network. You can for example run wxAstroCapture on Linux and Astrocaptureserver on Windows. 
+
 
 = Details =
+
+To specify that wxScopeServer is running on the same computer as wxAstroCapture, specify localhost for the Bridge interface host. The scope server uses port 5618 for connections. You can alternatively specify the host as the IP-address or name of another computer in your network where Astrocaptureserver is running. 
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
