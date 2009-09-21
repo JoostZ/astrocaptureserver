@@ -1,5 +1,5 @@
 #labels Featured
-This page gives a short summary of the use of! AstroCaptureServer
+This page gives a short summary of the use of !AstroCaptureServer
 
 = Introduction =
 
