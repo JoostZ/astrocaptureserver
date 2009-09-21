@@ -6,9 +6,9 @@ How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 !AstrocaptureServer is Windows software intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/ wxAstrocapture].
 !AstrocaptureServer serves as a TCP/IP server receiving Bridge Interface guiding commands from wxAstroCapture. It forwards the guiding instruction to any ASCOM supported telescope controller using its ASCOM driver. 
 
-= The Ascom interface =
+= The ASCOM interface =
 
-The Ascom interface is started from within Astrocaptureserver. Click _Select_ to activate the ASCOM Telescope Chooser window. Choose the type of telescope you have in the drop-down box (its ASCOM driver must be installed on your computer) and click _OK_. The connection with your telescope mount is established and Astrocaptureserver will forward the autoguiding messages to the ASCOM driver when received from wxAstrocapture.
+The ASCOM interface is started from within Astrocaptureserver. Click _Select_ to activate the ASCOM Telescope Chooser window. Choose the type of telescope you have in the drop-down box (its ASCOM driver must be installed on your computer) and click _OK_. The connection with your telescope mount is established and Astrocaptureserver will forward the autoguiding messages to the ASCOM driver when received from wxAstrocapture.
 
 = The TCP/IP interface =
 
