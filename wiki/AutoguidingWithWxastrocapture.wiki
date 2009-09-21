@@ -2,7 +2,7 @@ How to do Autoguiding with wxAstroCapture and Astrocaptureserver
 
 = Introduction =
 
-AstrocaptureServer is intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/]
+AstrocaptureServer is intended to communicate with the Bridge interface of [http://arnholm.org/astro/software/wxAstroCapture/ wxAstrocapture] 
 
 = Details =
 
