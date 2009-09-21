@@ -15,8 +15,9 @@ http://astrocaptureserver.googlecode.com/svn/images/ServerManual/image1.JPG     
 
 The left image above shows how to specify the server's TCP/IP address and port in wxAstrocapture. The right image shows where to change the default TCP/IP port in Astrocaptureserver.
 
-To establish communication between Astrocaptureserver (server) and wxAstrocapture (client) the server should be started *first*. After starting autoguiding in wxAstrocapture the connection is established and Astrocaptureserver will receive autguiding messages. See Image3.
+To establish communication between Astrocaptureserver (server) and wxAstrocapture (client) the server should be started *first*. After starting autoguiding in wxAstrocapture the connection is established and Astrocaptureserver will receive autguiding messages. See the image below:
 
+http://astrocaptureserver.googlecode.com/svn/images/ServerManual/image3.JPG 
 
 = The Ascom interface =
 
